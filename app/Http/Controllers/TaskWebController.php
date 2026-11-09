@@ -57,6 +57,13 @@ class TaskWebController extends Controller
         return view('tasks.show', compact('task', 'isCompleted'));
     }
 
+    public function destroy(Task $task): RedirectResponse
+    {
+        $task->delete();
+
+        return redirect()->route('tasks.index')->with('success', 'Tugas berhasil dihapus.');
+    }
+
     public function toggleComplete(Request $request, Task $task): RedirectResponse
     {
         $user = $request->user();
