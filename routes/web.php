@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
         Route::middleware(GuruMiddleware::class)->group(function () {
         Route::get('/tasks/create', [TaskWebController::class, 'create'])->name('tasks.create');
         Route::post('/tasks', [TaskWebController::class, 'store'])->name('tasks.store');
+        Route::get('/tasks/{task}/edit', [TaskWebController::class, 'edit'])->whereNumber('task')->name('tasks.edit');
+        Route::put('/tasks/{task}', [TaskWebController::class, 'update'])->whereNumber('task')->name('tasks.update');
         Route::delete('/tasks/{task}', [TaskWebController::class, 'destroy'])->whereNumber('task')->name('tasks.destroy');
     });
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Task;
 use App\Http\Requests\StoreTaskRequest;
+use App\Http\Requests\UpdateTaskRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -55,6 +56,18 @@ class TaskWebController extends Controller
         $isCompleted = $task->isCompletedByUser($request->user()->id);
 
         return view('tasks.show', compact('task', 'isCompleted'));
+    }
+
+    public function edit(Task $task): View
+    {
+        return view('tasks.edit', compact('task'));
+    }
+
+    public function update(UpdateTaskRequest $request, Task $task): RedirectResponse
+    {
+        $task->update($request->validated());
+
+        return redirect()->route('tasks.show', $task)->with('success', 'Tugas berhasil diperbarui.');
     }
 
     public function destroy(Task $task): RedirectResponse

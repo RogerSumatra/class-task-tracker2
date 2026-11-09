@@ -115,7 +115,7 @@
                                 @endif
 
                                 @if(auth()->user()->isGuru())
-                                    <a href="" class="text-xs text-gray-400 hover:text-indigo-600 px-2 py-1 rounded hover:bg-indigo-50 transition-colors">Edit</a>
+                                    <a href="{{ route('tasks.edit', $task) }}" class="text-xs text-gray-400 hover:text-indigo-600 px-2 py-1 rounded hover:bg-indigo-50 transition-colors">Edit</a>
                                     <form method="POST" action="{{ route('tasks.destroy', $task) }}" onsubmit="return confirm('Yakin hapus tugas ini?')">
                                         @csrf
                                         @method('DELETE')

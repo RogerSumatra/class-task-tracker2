@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-2 ml-4 shrink-0">
-                            <a href="" class="text-xs text-gray-500 hover:text-indigo-600 px-2 py-1 rounded hover:bg-indigo-50 transition-colors">Edit</a>
+                            <a href="{{ route('tasks.edit', $task) }}" class="text-xs text-gray-500 hover:text-indigo-600 px-2 py-1 rounded hover:bg-indigo-50 transition-colors">Edit</a>
                         </div>
                     </li>
                 @endforeach
