@@ -21,11 +21,11 @@
                             <a href="{{ route('dashboard') }}" class="hover:text-indigo-200 transition-colors {{ request()->routeIs('dashboard') ? 'text-white font-semibold underline underline-offset-4' : '' }}">
                                 Dashboard
                             </a>
-                            <a href="" class="hover:text-indigo-200 transition-colors {{ request()->routeIs('tasks.*') ? 'text-white font-semibold underline underline-offset-4' : '' }}">
+                            <a href="{{ route('tasks.index') }}" class="hover:text-indigo-200 transition-colors {{ request()->routeIs('tasks.index') ? 'text-white font-semibold underline underline-offset-4' : '' }}">
                                 Tugas
                             </a>
                             @if(auth()->user()->isGuru())
-                                <a href="" class="hover:text-indigo-200 transition-colors">
+                                <a href="{{ route('tasks.create') }}" class="hover:text-indigo-200 transition-colors {{ request()->routeIs('tasks.create') ? 'text-white font-semibold underline underline-offset-4' : '' }}">
                                     Buat Tugas
                                 </a>
                             @endif

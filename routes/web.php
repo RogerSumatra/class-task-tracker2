@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskWebController;
 use App\Http\Middleware\SiswaMiddleware;
+use App\Http\Middleware\GuruMiddleware;
 
 Route::get('/', fn () => redirect()->route('dashboard'));
 
@@ -26,5 +27,10 @@ Route::middleware('auth')->group(function () {
 
     Route::middleware(SiswaMiddleware::class)->group(function () {
         Route::post('/tasks/{task}/toggle-complete', [TaskWebController::class, 'toggleComplete'])->whereNumber('task')->name('tasks.toggle-complete');
+    });
+
+        Route::middleware(GuruMiddleware::class)->group(function () {
+        Route::get('/tasks/create', [TaskWebController::class, 'create'])->name('tasks.create');
+        Route::post('/tasks', [TaskWebController::class, 'store'])->name('tasks.store');
     });
 });

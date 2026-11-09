@@ -104,14 +104,24 @@
                             </div>
 
                             <div class="flex items-center gap-2 shrink-0">
-                                @if($isCompleted)
+                                @if(auth()->user()->isSiswa())
+                                    @if($isCompleted)
                                     <span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">✓ Selesai</span>
-                                @elseif($isPastDue)
-                                    <span class="px-2.5 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-full">⚠ Terlambat</span>
-                                @else
-                                    <span class="px-2.5 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">⏳ Belum</span>
+                                    @elseif($isPastDue)
+                                        <span class="px-2.5 py-1 bg-red-100 text-red-700 text-xs font-semibold rounded-full">⚠ Terlambat</span>
+                                    @else
+                                        <span class="px-2.5 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">⏳ Belum</span>
+                                    @endif
                                 @endif
 
+                                @if(auth()->user()->isGuru())
+                                    <a href="" class="text-xs text-gray-400 hover:text-indigo-600 px-2 py-1 rounded hover:bg-indigo-50 transition-colors">Edit</a>
+                                    <form method="" action="" onsubmit="return confirm('Yakin hapus tugas ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-xs text-gray-400 hover:text-red-600 px-2 py-1 rounded hover:bg-red-50 transition-colors cursor-pointer">Hapus</button>
+                                    </form>
+                                @endif
                                 
                             </div>
                         </div>
