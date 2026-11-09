@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +16,7 @@ class UserFactory extends Factory
     /**
      * The current password being used by the factory.
      */
-    protected static ?string $password;
+    protected static ?string $password = null;
 
     /**
      * Define the model's default state.
@@ -29,6 +30,7 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'role' => UserRole::Siswa,
             'remember_token' => Str::random(10),
         ];
     }
@@ -40,6 +42,26 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a guru.
+     */
+    public function guru(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => UserRole::Guru,
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a siswa.
+     */
+    public function siswa(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => UserRole::Siswa,
         ]);
     }
 }
