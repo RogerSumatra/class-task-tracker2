@@ -8,7 +8,7 @@
             <h1 class="text-2xl font-bold text-gray-900">Dashboard Guru</h1>
             <p class="mt-1 text-gray-500">Selamat datang, <span class="font-semibold text-gray-700">{{ auth()->user()->name }}</span>!</p>
         </div>
-        <a href="{{ route('tasks.create') }}" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-indigo-700 transition-colors">
+        <a href="" class="inline-flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:bg-indigo-700 transition-colors">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             Buat Tugas
         </a>
@@ -45,7 +45,7 @@
     <div class="bg-white rounded-xl border border-gray-200 shadow-sm">
         <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <h2 class="font-semibold text-gray-900">Tugas Terbaru</h2>
-            <a href="{{ route('tasks.index') }}" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Lihat semua →</a>
+            <a href="" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium">Lihat semua →</a>
         </div>
 
         @if($recentTasks->isEmpty())
@@ -58,7 +58,7 @@
                 @foreach($recentTasks as $task)
                     <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors">
                         <div class="min-w-0 flex-1">
-                            <a href="{{ route('tasks.show', $task) }}" class="font-medium text-gray-900 hover:text-indigo-600 truncate block">
+                            <a href="" class="font-medium text-gray-900 hover:text-indigo-600 truncate block">
                                 {{ $task->title }}
                             </a>
                             <div class="flex items-center gap-3 mt-1 text-xs text-gray-400">
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div class="flex items-center gap-2 ml-4 shrink-0">
-                            <a href="{{ route('tasks.edit', $task) }}" class="text-xs text-gray-500 hover:text-indigo-600 px-2 py-1 rounded hover:bg-indigo-50 transition-colors">Edit</a>
+                            <a href="" class="text-xs text-gray-500 hover:text-indigo-600 px-2 py-1 rounded hover:bg-indigo-50 transition-colors">Edit</a>
                         </div>
                     </li>
                 @endforeach
