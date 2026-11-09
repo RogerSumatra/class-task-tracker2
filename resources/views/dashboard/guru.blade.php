@@ -58,7 +58,7 @@
                 @foreach($recentTasks as $task)
                     <li class="flex items-center justify-between px-6 py-4 hover:bg-gray-50 transition-colors">
                         <div class="min-w-0 flex-1">
-                            <a href="" class="font-medium text-gray-900 hover:text-indigo-600 truncate block">
+                            <a href="{{ route('tasks.show', $task) }}" class="font-medium text-gray-900 hover:text-indigo-600 truncate block">
                                 {{ $task->title }}
                             </a>
                             <div class="flex items-center gap-3 mt-1 text-xs text-gray-400">

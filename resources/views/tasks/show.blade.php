@@ -16,19 +16,21 @@
         <div class="flex items-start justify-between gap-4 flex-wrap">
             <div class="flex flex-wrap gap-2">
                 @php $isPastDue = $task->due_date->isPast() && !$isCompleted; @endphp
-                @if($isCompleted)
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-700 text-sm font-semibold rounded-full">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                        Selesai
-                    </span>
-                @elseif($isPastDue)
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-100 text-red-700 text-sm font-semibold rounded-full">
-                        ⚠ Terlambat
-                    </span>
-                @else
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-100 text-orange-700 text-sm font-semibold rounded-full">
-                        ⏳ Belum Selesai
-                    </span>
+                @if(auth()->user()->isSiswa())
+                    @if($isCompleted)
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-green-100 text-green-700 text-sm font-semibold rounded-full">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                            Selesai
+                        </span>
+                    @elseif($isPastDue)
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-100 text-red-700 text-sm font-semibold rounded-full">
+                            ⚠ Terlambat
+                        </span>
+                    @else
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-100 text-orange-700 text-sm font-semibold rounded-full">
+                            ⏳ Belum Selesai
+                        </span>
+                    @endif
                 @endif
                 <span class="inline-flex items-center px-3 py-1.5 bg-indigo-100 text-indigo-700 text-sm font-semibold rounded-full">
                     {{ $task->class_name }}
@@ -38,11 +40,11 @@
             <!-- Actions for guru -->
             @if(auth()->user()->isGuru())
                 <div class="flex items-center gap-2">
-                    <a href="{{ route('tasks.edit', $task) }}" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                    <a href="" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                         Edit
                     </a>
-                    <form method="POST" action="{{ route('tasks.destroy', $task) }}" onsubmit="return confirm('Yakin ingin menghapus tugas ini?')">
+                    <form method="POST" action="" onsubmit="return confirm('Yakin ingin menghapus tugas ini?')">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors cursor-pointer">
@@ -74,8 +76,10 @@
                 <p class="mt-1.5 text-sm text-gray-700">{{ $task->created_at->format('d M Y, H:i') }}</p>
             </div>
             <div>
-                <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Jumlah Selesai</p>
-                <p class="mt-1.5 text-sm text-gray-700">{{ $task->completions->count() }} siswa</p>
+                @if(auth()->user()->isGuru())
+                    <p class="text-xs font-semibold text-gray-400 uppercase tracking-wider">Jumlah Selesai</p>
+                    <p class="mt-1.5 text-sm text-gray-700">{{ $task->completions->count() }} siswa</p>
+                @endif
             </div>
         </div>
 
